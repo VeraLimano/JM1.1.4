@@ -16,20 +16,19 @@ public class UserDaoJDBCImpl implements UserDao {
     Statement statement;
     PreparedStatement preparedStatement;
 
-//    {
-//        try {
-//            statement = util.getConnection().createStatement();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//    }
+    {
+        try {
+            statement = util.getConnection().createStatement();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
     @Override
     public void createUsersTable() {
-//        String sql = "CREATE TABLE user1 (id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(20), lastName VARCHAR(20), age TINYINT)";
+
         String sql = "CREATE TABLE IF NOT EXISTS user1 (id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(20), lastName VARCHAR(20), age TINYINT)";
         try {
-            statement = util.getConnection().createStatement();
             statement.executeUpdate(sql);
             System.out.println("Создание таблицы");
         } catch (SQLException throwables) {
@@ -39,10 +38,8 @@ public class UserDaoJDBCImpl implements UserDao {
 
     @Override
     public void dropUsersTable() {
-//        String sql = "DROP TABLE user1";
         String sql = "DROP TABLE IF EXISTS user1";
         try {
-            statement = util.getConnection().createStatement();
             statement.executeUpdate(sql);
             System.out.println("Удаление таблицы");
         } catch (SQLException throwables) {
@@ -83,10 +80,10 @@ public class UserDaoJDBCImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
+
         List<User> listUser = new ArrayList<>();
         String sql = "SELECT * FROM user1";
         try {
-            statement = util.getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             User user = new User();
             while (resultSet.next()) {
@@ -109,11 +106,9 @@ public class UserDaoJDBCImpl implements UserDao {
         String sql = "TRUNCATE TABLE user1";
         System.out.println("Очистка содержания таблицы");
         try {
-            statement = util.getConnection().createStatement();
             statement.executeUpdate(sql);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 }
