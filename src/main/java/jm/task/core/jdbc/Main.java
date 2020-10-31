@@ -3,10 +3,11 @@ package jm.task.core.jdbc;
 import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.service.UserServiceImpl;
+import jm.task.core.jdbc.util.Util;
 
 public class Main {
     public static void main(String[] args) {
-
+        Util util = new Util();
         UserServiceImpl dao = new UserServiceImpl();
 
         dao.createUsersTable();
@@ -20,5 +21,8 @@ public class Main {
 
         dao.cleanUsersTable();
         dao.dropUsersTable();
+
+        util.getSessionFactory().close();
+        System.out.println(util.getSessionFactory().isClosed());
     }
 }
