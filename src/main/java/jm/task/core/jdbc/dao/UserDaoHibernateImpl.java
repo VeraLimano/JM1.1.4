@@ -13,14 +13,6 @@ public class UserDaoHibernateImpl implements UserDao {
     Session session;
     Transaction transaction;
 
-    {
-        try {
-            session = util.getSessionFactory().openSession();
-        } catch (Exception throwables) {
-            System.out.println(throwables);
-        }
-    }
-
     @Override
     public void createUsersTable() {
         try {
